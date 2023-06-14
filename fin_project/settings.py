@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'fpages',
-    'info',
-    'django_filters',
-    'sign',
-    'protect',
+    # 'fpages',
+    # 'info',
+    # 'django_filters',
+    # 'sign',
+    # 'protect',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,7 +141,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
-LOGIN_URL = 'sign/login/'
-LOGIN_REDIRECT_URL = '/'
+# LOGIN_URL = 'sign/login/'
+# LOGIN_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
