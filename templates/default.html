@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SILANT</title>
+  {% load static %}
+  <link href="{% static 'css/default.css'%}" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="main-nav">
+        {% comment %} <li><a href="{% url 'car_list' %}"><img class="silant_text" src="{% static 'images/Logo.svg' %}" alt="Мой Силант" width="200" height="60"></a></li> {% endcomment %}
+        <li class="li-text">Электронная сервисная книжка "Мой Силант"</li>
+        <li class="li-login"><button class="button-login" onclick="location.href='/'">Авторизация</button></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+     {% block content %}
+     {{ flatpage.content }}
+     {% endblock content %}
+  </main>
+  
+  <footer>
+    <div class="div-footer">
+      <div class="div-footer-left">
+        <p class="div-footer-text">Мой Силант 2023</p>
+      </div>
+      <div class="div-footer-right">
+        <p class="div-footer-text">+7-8352-20-12-09</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "../default.html" %}
+{% load static %}
+{% block content %}
+<link href="{% static 'css/login.css'%}" rel="stylesheet">
+<h2 class="login-title"> Войти в систему </h2>
+<form method="post" action="{% url 'login' %}" class="login-form">
+{% csrf_token %}
+<table class="login-table">
+<tr>
+    <td class="authorization-label">Логин:</td>
+    <td><input type="text" name="username" id="your-username" class="authorization-field" required></td>
+</tr>
+<tr>
+    <td class="authorization-label">Пароль:</td>
+    <td><input type="password" name="password" id="your-password" class="authorization-field" required></td>
+</tr>
+</table>
+
+<input type="submit" value="Войти" class="enter-button">
+</form>
+{% endblock %}
