@@ -84,7 +84,6 @@ footer {
 
 li {
     list-style-type: none;
-    /* Убираем маркеры */
 }
 
 .li-login {
@@ -93,7 +92,7 @@ li {
 }
 
 .button-login {
-    background-color: #D20A11;
+    background-color: #ada8e9;
     border: none;
     text-align: center;
     text-decoration: none;
@@ -111,10 +110,6 @@ li {
     font-size: 22pt;
     color: #EBE6D6;
     text-align: center;
-}
-
-.telegram-image {
-    margin-right: 5px;
 }
 
 main {
