@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_ujo2x32dqzt36=!uk_1x&^flb@-d#wln(%7nl&r0-5i#ose*+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -40,11 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    # 'fpages',
-    # 'info',
-    # 'django_filters',
-    # 'sign',
-    # 'protect',
+    'django_filters',
+    'sign',
+    'protect',
 ]
 
 SITE_ID = 1
@@ -141,7 +139,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
-# LOGIN_URL = 'sign/login/'
-# LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'sign/login/'
+LOGIN_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
