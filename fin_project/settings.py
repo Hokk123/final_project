@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django_filters',
     'sign',
     'protect',
+    'allauth',
+    'allauth.account',
 ]
 
 SITE_ID = 1
