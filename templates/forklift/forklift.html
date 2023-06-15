@@ -1,0 +1,51 @@
+{% extends '../index.html' %}
+{% load static %}
+{% block content %}
+<div class="nav_table">
+    <a class="btn" href="{% url 'table_car' %}">Общая информация</a>
+    <a class="btn" href="{% url 'table_service' %}">ТО</a>
+    <a class="btn" href="{% url 'table_claims' %}">Рекламации</a>
+</div>
+<table>
+    <tr>
+        <td>Модель техники</td>
+        <td>Зав. № машины</td>
+        <td>Модель двигателя</td>
+        <td>Зав. № двигателя</td>
+        <td>Модель трансмиссии (производитель, артикул)</td>
+        <td>Зав. № трансмиссии</td>
+        <td>Модель ведущего моста</td>
+        <td>Зав. № ведущего моста</td>
+        <td>Модель управляемого моста</td>
+        <td>Зав. № управляемого моста</td>
+        <td>Дата отгрузки с завода</td>
+        <td>Покупатель</td>
+        <td>Грузополучатель (конечный потребитель)</td>
+        <td>Адрес поставки (эксплуатации)</td>
+        <td>Комплектация (доп. опции)</td>
+        <td>Сервисная компания</td>
+    </tr>
+    {% for p in posts %}
+    {% autoescape on %}
+    <tr>
+        <td>{{p.vehicle_model}}</td>
+        <td><a href="{{ p.get_absolute_url }}">{{p.machine_serial_number}}</a></td>
+        <td>{{p.engine_model}}</td>
+        <td>{{p.engine_serial_number}}</td>
+        <td>{{p.transmission_model}}</td>
+        <td>{{p.transmission_serial_number}}</td>
+        <td>{{p.drive_axle_model}}</td>
+        <td>{{p.drive_axle_serial_number}}</td>
+        <td>{{p.steerable_axle_model}}</td>
+        <td>{{p.steerable_axle_serial_number}}</td>
+        <td>{{p.shipping_date}}</td>
+        <td>{{p.client}}</td>
+        <td>{{p.consignee}}</td>
+        <td>{{p.delivery_address}}</td>
+        <td>{{p.equipment}}</td>
+        <td>{{p.service_company}}</td>
+    </tr>
+    {% endautoescape %}
+    {% endfor %}
+</table>
+{% endblock %}
