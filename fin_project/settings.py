@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_filters',
     'sign',
     'protect',
+    'forklift',
     'allauth',
     'allauth.account',
 ]

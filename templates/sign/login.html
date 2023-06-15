@@ -1,7 +1,7 @@
 {% extends "../default.html" %}
 {% load static %}
 {% block content %}
-<link href="{% static 'css/login.css'%}" rel="stylesheet">
+<link href="{% static 'css/default.css'%}" rel="stylesheet">
 <h2 class="login-title"> Войти в систему </h2>
 <form method="post" action="{% url 'login' %}" class="login-form">
 {% csrf_token %}
