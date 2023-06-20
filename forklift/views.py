@@ -15,10 +15,10 @@ class CarsList(LoginRequiredMixin, ListView):
     ordering = '-date_of_shipment'
     #указываем имя шаблона, в котором будут все инструкции о том
     #как именно пользователю должны быть показаны наши объекты
-    template_name = 'info/cars.html'
+    template_name = 'forklift/forklift.html'
     #это имя списка, в котором будут лежать все объекты.
     #его надо указать, чтобы обратиться к списку объекту в html-шаблоне.
-    context_object_name = 'cars'
+    context_object_name = 'forklifts'
 
 
     # Переопределяем функцию получения списка машин
@@ -45,23 +45,3 @@ class CarsList(LoginRequiredMixin, ListView):
        context['user_in_group_service_company'] = user_in_group_service_complany
        return context
 
-class CarDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
-    #Модель все та же, но мы хотим получать информацию по отдельному товару
-    model = Forklift
-    #Используем другой шаблон - car.html
-    template_name = 'info/car.html'
-    #Название объекта, в котором будет выбранный пользователем продукт
-    context_object_name = 'car'
-    permission_required = ('info.view_car', )
-
-    def test_func(self):
-       obj = self.get_object()
-       ruser = self.request.user
-       return obj.client.user == ruser or obj.service_company.user == ruser or ruser.is_superuser or ruser.groups.filter(name='manager').exists()
-    
-    def get_context_data(self, **kwargs):
-       context = super().get_context_data(**kwargs)
-       #проверяем принадлежность пользователя к группе для отображения кнопки создания машины
-       user_in_group_manager = self.request.user.groups.filter(name='manager').exists()
-       context['user_in_group_manager'] = user_in_group_manager
-       return context
