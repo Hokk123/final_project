@@ -3,7 +3,7 @@ from .models import Forklift, To, Claim
 
 
 # фильтр для модели погрузчик
-class CarsFilter(FilterSet):
+class ForkliftFilter(FilterSet):
     class Meta:
         model = Forklift
         fields = {

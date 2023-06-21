@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SILANT</title>
+  <meta name="description" content="Электронная сервисная книжка для вилочных погрузчиков"/>
   {% load static %}
   <link href="{% static 'css/default.css'%}" rel="stylesheet">
 </head>
@@ -10,8 +11,7 @@
   <header>
     <nav>
       <ul class="main-nav">
-        {% comment %} <li><a href="{% url 'car_list' %}"><img class="silant_text" src="{% static 'images/Logo.svg' %}" alt="Мой Силант" width="200" height="60"></a></li> {% endcomment %}
-        <li><a href="{}"><img class="silant_text" src="{% static 'images/noroot.png' %}" alt="Мой Силант" width="200" height="60"></a></li>
+        <li><a href="{% url 'forklift_list' %}"><img class="silant_text" src="{% static 'images/noroot.png' %}" alt="Мой Силант" width="200" height="60"></a></li>
         <li class="li-text">Электронная сервисная книжка "Мой Силант"</li>
         <li class="li-login"><button class="button-login" onclick="location.href='/'">Авторизация</button></li>
       </ul>
@@ -20,12 +20,13 @@
   
   <main>
         <div class="header">
-          <div class="logo">SILANT</div>
           <div class="header-right">
           {% if request.user.is_authenticated %}
-            <a href="{% url 'add_claims' %}">Добавить Рекламацию</a>
-            <a href="{% url 'add_services' %}">Добавить ТО</a>
-            <a href="{% url 'add_forklifts' %}">Добавить Машину</a>
+            <div class="buttons">
+              <button id="table1-button" data-id="{{ forklift.pk }}" class="button">Показать технику</button>
+              <button id="table2-button" class="button">Показать TO</button>
+              <button id="table3-button" class="button">Показать рекламации</button>
+            </div>
           {% endif %}
           </div>
         </div>

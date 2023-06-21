@@ -18,6 +18,10 @@
     font-family: 'Astra Sans Regular';
 }
 
+.hidden {
+    display: none;
+}
+
 body {
     font-family: 'Astra Sans Regular',  Arial, Helvetica, sans-serif;
     margin: 0;
@@ -82,6 +86,90 @@ footer {
     align-items: center;
 }
 
+.title {
+    font-family: 'Astra Sans Regular',  Arial, Helvetica, sans-serif;
+    font-size: 18pt;
+    color: #163E6C;
+    text-align: center;
+}
+
+.form-control {
+    text-align: center;
+    height: 30px;
+    display: flex;
+    flex-direction: raw;
+    justify-content: center;
+}
+
+.form-control input {
+    border: 2px solid #163E6C;
+    color: #163E6C;
+    font-family: 'Astra Sans Bold',  Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #f5f4ed;
+    outline: none;
+    width: 170px;
+}
+
+.form-button {
+    font-size: 0;
+    text-indent: -999999px;
+    width: 35px !important;
+    height: 35.8px;
+    margin-left: 5px;
+    border: none !important;
+    margin: 0;
+    margin-left: 3px;
+    padding: 3px;
+    background-size: 28px 28px;
+    background-position: center;
+    background-color: #EBE6D6 !important;
+}
+
+.button {
+    background-color: #D20A11;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #FFFFFF;
+    padding: 10px 18px;
+    font-family: 'Astra Sans Bold',  Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+.buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: raw;
+    justify-content: center;
+}
+
+.form-login {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-login-in {
+    border: 2px solid #163E6C;
+    color: #163E6C;
+    font-family: 'Astra Sans Bold',  Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #f5f4ed;
+    outline: none;
+    height: 30px;
+    width: 210px;
+}
+
 li {
     list-style-type: none;
 }
@@ -89,6 +177,21 @@ li {
 .li-login {
     border-radius: 10px;
     margin: 10px 20px;
+}
+
+.login-title {
+    font-family: 'Astra Sans Regular',  Arial, Helvetica, sans-serif;
+    font-size: 18pt;
+    color: #163E6C;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.login-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .button-login {
@@ -103,6 +206,13 @@ li {
     font-family: 'Astra Sans Bold',  Arial, Helvetica, sans-serif;
     font-size: 17px;
     border-radius: 2px;
+}
+
+.label-login {
+    font-family: 'Astra Sans Regular',  Arial, Helvetica, sans-serif;
+    font-size: 13pt;
+    color: #163E6C;
+    text-align: center;
 }
 
 .li-text {

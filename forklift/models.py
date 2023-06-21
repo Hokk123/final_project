@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
+
 class ModelEquipment(models.Model): #модель техники (справочник)
     title = models.CharField(max_length = 32)
     description = models.TextField()
@@ -69,7 +70,7 @@ class RecoveryMethod(models.Model):  #способ восстановления
 
 class Service_Company(models.Model):  #справочник пользователей с соответствующими правами
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-    title = models.CharField(max_length = 32)
+    title = models.CharField(max_length = 50)
     description = models.TextField()
     
     def __str__(self):
@@ -77,8 +78,8 @@ class Service_Company(models.Model):  #справочник пользовате
 
 
 class Client(models.Model):  #справочник пользователей с соответствующими правами
-    user = models.OneToOneField(User, on_delete = models.CASCADE, related_name = 'user_cl')
-    title = models.CharField(max_length = 32)
+    user = models.OneToOneField(User, on_delete = models.CASCADE, related_name = 'user_client')
+    title = models.CharField(max_length = 50)
     description = models.TextField()
     
     def __str__(self):
