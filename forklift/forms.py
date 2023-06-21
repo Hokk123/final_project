@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 
-class CarForm(forms.ModelForm):
+class ForkliftForm(forms.ModelForm):
    class Meta:
        model = Forklift
        fields = [
