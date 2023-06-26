@@ -1,0 +1,29 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Модель управляемого моста
+{% endblock title %}
+
+{% block content %}
+<br>
+<h5>Информация о модели управляемого моста</h5>
+<hr>
+{% if controlled_bridge_model %}
+<div>
+    <h5>Название:</h5>
+    <p>{{controlled_bridge_model.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{controlled_bridge_model.description }}</p>
+</div>
+{% else %}
+<h2>Модель управляемого моста отсутсвует!</h2>
+{% endif %}
+</hr>
+{% if user.is_superuser or user_in_group_manager %}
+    <button><a href="{% url 'controlled_bridge_model_create' %}">Создать модель управляемого моста</a></button>
+    <button><a href="{% url 'controlled_bridge_model_update' controlled_bridge_model.pk %}">Редактировать модель управляемого моста</a></button>
+    <button><a href="{% url 'controlled_bridge_model_delete' controlled_bridge_model.pk %}">Удалить модель управляемого моста</a></button>
+{% endif %}
+{% endblock content %}

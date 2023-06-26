@@ -128,14 +128,14 @@ Forklifts
             <tr>
                     {% if user.is_authenticated %}
                         <td><a href="{% url 'forklift_detail' forklift.pk %}">{{ forklift.machine_serial_number }}</a></td>
-                        <!-- <td><a href="{% url 'model_equipment_detail' forklift.model_equipment.pk %}">{{ forklift.model_equipment.title }}</a></td>
+                        <td><a href="{% url 'model_equipment_detail' forklift.model_equipment.pk %}">{{ forklift.model_equipment.title }}</a></td>
                         <td><a href="{% url 'engine_model_detail' forklift.engine_model.pk %}">{{ forklift.engine_model.title }}</a></td>
                         <td>{{ forklift.engine_serial_number }}</td>
                         <td><a href="{% url 'transmission_model_detail' forklift.transmission_model.pk %}">{{ forklift.transmission_model.title }}</a></td>
                         <td>{{ forklift.transmission_serial_number }}</td>
                         <td><a href="{% url 'drive_axle_model_detail' forklift.drive_axle_model.pk %}">{{ forklift.drive_axle_model.title }}</a></td>
                         <td>{{ forklift.drive_axle_serial_number }}</td>
-                        <td><a href="{% url 'controlled_bridge_model_detail' forklift.controlled_bridge_model.pk %}">{{ forklift.controlled_bridge_model.title }}</a></td> -->
+                        <td><a href="{% url 'controlled_bridge_model_detail' forklift.controlled_bridge_model.pk %}">{{ forklift.controlled_bridge_model.title }}</a></td>
                         <td>{{ forklift.controlled_bridge_serial_number }}</td>
                         <td>{{ forklift.supply_contract }}</td>
                         <td>{{ forklift.date_of_shipment }}</td>

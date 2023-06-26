@@ -21,13 +21,17 @@
   <main>
         <div class="header">
           <div class="header-right">
-          {% if request.user.is_authenticated %}
             <div class="buttons">
-              <button id="table1-button" data-id="{{ forklift.pk }}" class="button">Показать технику</button>
-              <button id="table2-button" class="button">Показать TO</button>
-              <button id="table3-button" class="button">Показать рекламации</button>
+              <form action="/forklift/">
+                <button type="submit" id="table1-button" data-id="{{ forklift.pk }}" class="button">Показать технику</button>
+              </form>
             </div>
-          {% endif %}
+            {% if request.user.is_authenticated %}
+              <div class="buttons">
+                <button id="table2-button" class="button">Показать TO</button>
+                <button id="table3-button" class="button">Показать рекламации</button>
+              </div>
+            {% endif %}
           </div>
         </div>
      {% block content %}

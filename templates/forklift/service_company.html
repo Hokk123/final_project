@@ -1,0 +1,22 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Сервисная компания
+{% endblock title %}
+
+{% block content %}
+<hr>
+{% if service_company %}
+<div>
+    <h5>Название:</h5>
+    <p>{{service_company.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{service_company.description }}</p>
+</div>
+{% else %}
+<h2>Сервисная компания отсутсвует!</h2>
+{% endif %}
+</hr>
+{% endblock content %}

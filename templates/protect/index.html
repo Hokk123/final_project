@@ -1,5 +1,6 @@
 {% extends "../default.html" %}
 {% load static %}
+{% csrf_token %}
 {% block content %}
 <link href="{% static 'css/default.css'%}" rel="stylesheet">
 <h2 class="login-title">Страница авторизованного пользователя {{request.user.first_name}}</h2>

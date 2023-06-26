@@ -1,0 +1,29 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Модель трансмиссии
+{% endblock title %}
+
+{% block content %}
+<br>
+<h5>Информация о модели трансмиссии</h5>
+<hr>
+{% if transmission_model %}
+<div>
+    <h5>Название:</h5>
+    <p>{{transmission_model.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{transmission_model.description }}</p>
+</div>
+{% else %}
+<h2>Модель трансмиссии отсутсвует!</h2>
+{% endif %}
+</hr>
+{% if user.is_superuser or user_in_group_manager %}
+    <button><a href="{% url 'transmission_model_create' %}">Создать модель трансмиссии</a></button>
+    <button><a href="{% url 'transmission_model_update' transmission_model.pk %}">Редактировать модель трансмиссии</a></button>
+    <button><a href="{% url 'transmission_model_delete' transmission_model.pk %}">Удалить модель трансмиссии</a></button>
+{% endif %}
+{% endblock content %}

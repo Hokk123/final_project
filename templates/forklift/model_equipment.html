@@ -1,0 +1,29 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Модель техники
+{% endblock title %}
+
+{% block content %}
+<br>
+<h5>Информация о модели техники</h5>
+<hr>
+{% if model_equipment %}
+<div>
+    <h5>Название:</h5>
+    <p>{{model_equipment.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{model_equipment.description }}</p>
+</div>
+{% else %}
+<h2>Модель техники отсутсвует!</h2>
+{% endif %}
+</hr>
+{% if user.is_superuser or user_in_group_manager %}
+    <button><a href="{% url 'model_equipment_create' %}">Создать модель техники</a></button>
+    <button><a href="{% url 'model_equipment_update' model_equipment.pk %}">Редактировать модель техники</a></button>
+    <button><a href="{% url 'model_equipment_delete' model_equipment.pk %}">Удалить модель техники</a></button>
+{% endif %}
+{% endblock content %}

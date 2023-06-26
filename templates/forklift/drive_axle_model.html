@@ -1,0 +1,29 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Модель ведущего моста
+{% endblock title %}
+
+{% block content %}
+<br>
+<h5>Информация о модели ведущего моста</h5>
+<hr>
+{% if drive_axle_model %}
+<div>
+    <h5>Название:</h5>
+    <p>{{drive_axle_model.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{drive_axle_model.description }}</p>
+</div>
+{% else %}
+<h2>Модель ведущего моста отсутсвует!</h2>
+{% endif %}
+</hr>
+{% if user.is_superuser or user_in_group_manager %}
+    <button><a href="{% url 'drive_axle_model_create' %}">Создать модель ведущего моста</a></button>
+    <button><a href="{% url 'drive_axle_model_update' drive_axle_model.pk %}">Редактировать модель ведущего моста</a></button>
+    <button><a href="{% url 'drive_axle_model_delete' drive_axle_model.pk %}">Удалить модель ведущего моста</a></button>
+{% endif %}
+{% endblock content %}

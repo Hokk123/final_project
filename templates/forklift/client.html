@@ -1,0 +1,22 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Клиент
+{% endblock title %}
+
+{% block content %}
+<hr>
+{% if client %}
+<div>
+    <h5>Название:</h5>
+    <p>{{client.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{client.description }}</p>
+</div>
+{% else %}
+<h2>Клиент отсутсвует!</h2>
+{% endif %}
+</hr>
+{% endblock content %}

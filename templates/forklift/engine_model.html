@@ -1,0 +1,29 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Модель двигателя
+{% endblock title %}
+
+{% block content %}
+<br>
+<h5>Информация о модели двигателя</h5>
+<hr>
+{% if engine_model %}
+<div>
+    <h5>Название:</h5>
+    <p>{{engine_model.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{engine_model.description }}</p>
+</div>
+{% else %}
+<h2>Модель двигателя отсутсвует!</h2>
+{% endif %}
+</hr>
+{% if user.is_superuser or user_in_group_manager %}
+    <button><a href="{% url 'engine_model_create' %}">Создать модель двигателя</a></button>
+    <button><a href="{% url 'engine_model_update' engine_model.pk %}">Редактировать модель двигателя</a></button>
+    <button><a href="{% url 'engine_model_delete' engine_model.pk %}">Удалить модель двигателя</a></button>
+{% endif %}
+{% endblock content %}
