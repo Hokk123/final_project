@@ -100,9 +100,9 @@ class Forklift(models.Model):  #вилочный погрузчик
     controlled_bridge_serial_number = models.CharField(max_length = 32) #заводской № управляемого моста
     delivery_contract = models.CharField(max_length = 32) #договор поставки №, дата
     date_of_shipment = models.DateField() #дата отгрузки с завода
-    end_user = models.CharField(max_length = 32) #грузополучатель
-    delivery_address = models.CharField(max_length = 32) #адрес поставки
-    equipment = models.CharField(max_length = 32) #комплектация
+    end_user = models.CharField(max_length = 64) #грузополучатель
+    delivery_address = models.CharField(max_length = 256) #адрес поставки
+    equipment = models.CharField(max_length = 256) #комплектация
     client = models.ForeignKey(Client, on_delete = models.CASCADE) #клиент
     service_company = models.ForeignKey(Service_Company, on_delete = models.CASCADE) #сервисная компания
     
