@@ -21,13 +21,11 @@
   <main>
         <div class="header">
           <div class="header-right">
-            <div class="buttons">
-              <form action="/forklift/">
-                <button type="submit" id="table1-button" data-id="{{ forklift.pk }}" class="button">Показать технику</button>
-              </form>
-            </div>
             {% if request.user.is_authenticated %}
               <div class="buttons">
+                <form action="/forklift/">
+                  <button type="submit" id="table1-button" data-id="{{ forklift.pk }}" class="button">Показать технику</button>
+                </form>
                 <button id="table2-button" class="button">Показать TO</button>
                 <button id="table3-button" class="button">Показать рекламации</button>
               </div>
