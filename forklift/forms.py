@@ -27,7 +27,7 @@ class ForkliftForm(forms.ModelForm):
     
    def __init__(self, *args, **kwargs):
        user = kwargs.pop('user', None)
-       super(CarForm, self).__init__(*args, **kwargs)
+       super(ForkliftForm, self).__init__(*args, **kwargs)
 
        if user and not user.is_authenticated:
            self.fields['delivery_contract'].widget.attrs['disabled'] = True

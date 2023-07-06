@@ -65,6 +65,26 @@ class ForkliftDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView, Permis
        return context
 
 
+class ForkliftCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = ForkliftForm
+   model = Forklift
+   template_name = 'forklift/forklift_edit.html'
+   permission_required = 'forklift.add_forklift'
+
+class ForkliftUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = ForkliftForm
+   model = Forklift
+   template_name = 'forklift/forklift_edit.html'
+   permission_required = 'forklift.change_forklift'
+
+class ForkliftDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   model = Forklift
+   template_name = 'forklift/Forklift_delete.html'
+   success_url = reverse_lazy('forklift_list')
+   permission_required = 'forklift.delete_forklift'
+
+
+
 class ModelEquipmentDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = ModelEquipment
    template_name = 'forklift/model_equipment.html'
@@ -89,24 +109,24 @@ class ModelEquipmentDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
        context['user_in_group_manager'] = user_in_group_manager
        return context
 
+class ModelEquipmentCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = ModelEquipmentForm
+   model = ModelEquipment
+   template_name = 'forklift/model_equipment_edit.html'
+   permission_required = 'forklift.add_modelequipment'
 
-class ForkliftCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-   form_class = ForkliftForm
-   model = Forklift
-   template_name = 'forklift/Forklift_edit.html'
-   permission_required = 'forklift.add_Forklift'
+class ModelEquipmentUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = ModelEquipmentForm
+   model = ModelEquipment
+   template_name = 'forklift/model_equipment_edit.html'
+   permission_required = 'forklift.change_modelequipment'
 
-class ForkliftUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-   form_class = ForkliftForm
-   model = Forklift
-   template_name = 'forklift/Forklift_edit.html'
-   permission_required = 'forklift.change_Forklift'
+class ModelEquipmentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   form_class = ModelEquipmentForm
+   model = ModelEquipment
+   template_name = 'forklift/model_equipment_delete.html'
+   permission_required = 'forklift.delete_modelequipment'
 
-class ForkliftDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
-   model = Forklift
-   template_name = 'forklift/Forklift_delete.html'
-   success_url = reverse_lazy('Forklift_list')
-   permission_required = 'forklift.delete_Forklift'
 
 
 class ToList(LoginRequiredMixin, ListView):
@@ -180,6 +200,7 @@ class ToDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
        return obj.forklift.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
 
 
+
 class EngineModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = EngineModel
    template_name = 'forklift/engine_model.html'
@@ -202,6 +223,25 @@ class EngineModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
        user_in_group_manager = self.request.user.groups.filter(name='manager').exists()
        context['user_in_group_manager'] = user_in_group_manager
        return context
+      
+class EngineModelCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = EngineModelForm
+   model = EngineModel
+   template_name = 'forklift/engine_model_edit.html'
+   permission_required = 'forklift.add_enginemodel'
+
+class EngineModelUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = EngineModelForm
+   model = EngineModel
+   template_name = 'forklift/engine_model_edit.html'
+   permission_required = 'forklift.change_enginemodel'
+
+class EngineModelDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   form_class = EngineModelForm
+   model = EngineModel
+   template_name = 'forklift/engine_model_delete.html'
+   permission_required = 'forklift.delete_enginemodel'
+
 
 
 class TransmissionModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):

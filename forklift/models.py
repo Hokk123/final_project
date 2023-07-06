@@ -107,7 +107,7 @@ class Forklift(models.Model):  #вилочный погрузчик
     service_company = models.ForeignKey(Service_Company, on_delete = models.CASCADE) #сервисная компания
     
     def get_absolute_url(self):
-        return reverse('cars_list', args = [str(self.id)])
+        return reverse('forklift_list', args = [str(self.id)])
     
     def __str__(self):
         return self.machine_serial_number
