@@ -85,6 +85,7 @@ class ForkliftDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 
 
+#Модель погрузчика
 class ModelEquipmentDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = ModelEquipment
    template_name = 'forklift/model_equipment.html'
@@ -101,8 +102,7 @@ class ModelEquipmentDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
             if(self.get_object() == technique_model and (forklift.client.user == datauser or forklift.service_company.user == datauser)):
                return True
          return False
-      
-   
+         
    def get_context_data(self, **kwargs):
        context = super().get_context_data(**kwargs)
        user_in_group_manager = self.request.user.groups.filter(name='manager').exists()
@@ -129,6 +129,7 @@ class ModelEquipmentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteVi
 
 
 
+#ТО
 class ToList(LoginRequiredMixin, ListView):
     model = To
     #template_name = 'forklift/to.html'
@@ -136,33 +137,21 @@ class ToList(LoginRequiredMixin, ListView):
     context_object_name = 'to'
     permission_required = 'forklift.view_to'
 
-
-    # Переопределяем функцию получения списка машин
     def get_queryset(self):
-       # Получаем обычный запрос
        queryset = super().get_queryset()
-       # Используем наш класс фильтрации.
-       # self.request.GET содержит объект QueryDict, который мы рассматривали
-       # в этом юните ранее.
-       # Сохраняем нашу фильтрацию в объекте класса,
-       # чтобы потом добавить в контекст и использовать в шаблоне.
        self.filterset = ToFilter(self.request.GET, queryset)
-       # Возвращаем из функции отфильтрованный список машин
        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
        context = super().get_context_data(**kwargs)
-       # Добавляем в контекст объект фильтрации.
        context['filterset'] = self.filterset
        context['ordering'] = self.ordering
        return context
 
 class ToDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
-    #Модель все та же, но мы хотим получать информацию по отдельному товару
     model = To
     #Используем другой шаблон - forklift.html
     template_name = 'forklift/to.html'
-    #Название объекта, в котором будет выбранный пользователем продукт
     context_object_name = 'to'
     permission_required = 'forklift.view_to'
     
@@ -201,6 +190,7 @@ class ToDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 
+#Двигатель
 class EngineModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = EngineModel
    template_name = 'forklift/engine_model.html'
@@ -244,6 +234,7 @@ class EngineModelDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
 
 
 
+#Трансмиссия
 class TransmissionModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = TransmissionModel
    template_name = 'forklift/transmission_model.html'
@@ -267,7 +258,27 @@ class TransmissionModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailVie
        context['user_in_group_manager'] = user_in_group_manager
        return context
 
+class TransmissionModelCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = TransmissionModelForm
+   model = TransmissionModel
+   template_name = 'forklift/transmission_model_edit.html'
+   permission_required = 'forklift.add_transmissionmodel'
 
+class TransmissionModelUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = TransmissionModelForm
+   model = TransmissionModel
+   template_name = 'forklift/transmission_model_edit.html'
+   permission_required = 'forklift.change_transmissionmodel'
+
+class TransmissionModelDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   form_class = TransmissionModelForm
+   model = TransmissionModel
+   template_name = 'forklift/transmission_model_delete.html'
+   permission_required = 'forklift.delete_transmissionmodel'
+
+
+
+#Ведущий мост
 class DriveAxleModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = DriveAxleModel
    template_name = 'forklift/drive_axle_model.html'
@@ -291,7 +302,27 @@ class DriveAxleModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
        context['user_in_group_manager'] = user_in_group_manager
        return context
 
+class DriveAxleModelCreate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = DriveAxleModelForm
+   model = DriveAxleModel
+   template_name = 'forklift/drive_axle_model_edit.html'
+   permission_required = 'forklift.add_driveaxlemodel'
 
+class DriveAxleModelUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = DriveAxleModelForm
+   model = DriveAxleModel
+   template_name = 'forklift/drive_axle_model_edit.html'
+   permission_required = 'forklift.change_driveaxlemodel'
+      
+class DriveAxleModelDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   form_class = DriveAxleModelForm
+   model = DriveAxleModel
+   template_name = 'forklift/drive_axle_model_delete.html'
+   permission_required = 'forklift.delete_driveaxlemodel'
+
+
+
+#Управляемый мост
 class ControlledBridgeModelDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = ControlledBridgeModel
    template_name = 'forklift/controlled_bridge_model.html'
@@ -315,7 +346,27 @@ class ControlledBridgeModelDetail(LoginRequiredMixin, UserPassesTestMixin, Detai
        context['user_in_group_manager'] = user_in_group_manager
        return context
 
+class ControlledBridgeModelCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = ControlledBridgeModelForm
+   model = ControlledBridgeModel
+   template_name = 'forklift/controlled_bridge_model_edit.html'
+   permission_required = 'forklift.add_controlledbridgemodel'
 
+class ControlledBridgeModelUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = ControlledBridgeModelForm
+   model = ControlledBridgeModel
+   template_name = 'forklift/controlled_bridge_model_edit.html'
+   permission_required = 'forklift.change_controlledbridgemodel'
+
+class ControlledBridgeModelDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   form_class = ControlledBridgeModelForm
+   model = ControlledBridgeModel
+   template_name = 'forklift/controlled_bridge_model_delete.html'
+   permission_required = 'forklift.delete_controlledbridgemodel'
+
+
+
+#Клиенты
 class ClientDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = Client
    template_name = 'forklift/client.html'
@@ -334,6 +385,8 @@ class ClientDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
          return False
 
 
+
+#Сервисные компании
 class ServiceCompanyDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
    model = Service_Company
    template_name = 'forklift/service_company.html'

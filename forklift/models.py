@@ -8,6 +8,9 @@ class ModelEquipment(models.Model): #модель техники (справоч
     title = models.CharField(max_length = 32)
     description = models.TextField()
     
+    def get_absolute_url(self):
+        return reverse('model_equipment_detail', args = [str(self.id)])
+    
     def __str__(self):
         return self.title
     
@@ -15,6 +18,9 @@ class ModelEquipment(models.Model): #модель техники (справоч
 class EngineModel(models.Model):  #модель двигателя (справочник)
     title = models.CharField(max_length = 32)
     description = models.TextField()
+    
+    def get_absolute_url(self):
+        return reverse('engine_model_detail', args = [str(self.id)])
     
     def __str__(self):
         return self.title
@@ -24,6 +30,9 @@ class TransmissionModel(models.Model):  #модель трансмиссии (с
     title = models.CharField(max_length = 32)
     description = models.TextField()
     
+    def get_absolute_url(self):
+        return reverse('transmission_model_detail', args = [str(self.id)])
+    
     def __str__(self):
         return self.title
 
@@ -32,6 +41,9 @@ class DriveAxleModel(models.Model):  #модель ведущего моста (
     title = models.CharField(max_length = 32)
     description = models.TextField()
     
+    def get_absolute_url(self):
+        return reverse('drive_axle_model_detail', args = [str(self.id)])
+    
     def __str__(self):
         return self.title
 
@@ -39,6 +51,9 @@ class DriveAxleModel(models.Model):  #модель ведущего моста (
 class ControlledBridgeModel(models.Model):  #модель управляемого моста (справочник)
     title = models.CharField(max_length = 32)
     description = models.TextField()
+    
+    def get_absolute_url(self):
+        return reverse('controlled_bridge_model_detail', args = [str(self.id)])
     
     def __str__(self):
         return self.title
