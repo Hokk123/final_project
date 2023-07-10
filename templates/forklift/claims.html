@@ -1,0 +1,50 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+
+{% block title %}
+Claim
+{% endblock title %}
+ 
+{% block content %}
+   <h1>Все рекламации</h1>
+
+   <form action = "" method = "get">
+       {{ filterset.form.as_p}}
+       <input type = "submit" valut = "Найти" />
+    </form>
+
+    <hr>
+    {% if claims %}
+       <table>
+           <tr>
+               <td> Дата отказа </td>
+               <td> Наработка, м/час </td>
+               <td> Узел отказа </td>
+               <td> Описание отказа </td>
+               <td> Способ восстановления </td>
+               <td> Используемые запасные части </td>
+               <td> Дата восстановления </td>
+               <td> Время простоя техники </td>
+               <td> машина </td>
+               <td> сервисная компания </td>
+           </tr>
+
+           {% for claim in claims %}
+           <tr>
+               <td>{{ claim.orders_date }}</td>
+               <td>{{ claim.operating }}</td>
+               <td>{{ claim.order_note.title }}</td>
+               <td>{{ claim.order_description }}</td>
+               <td>{{ claim.recovery_method.title }}</td>
+               <td>{{ claim.used_spare_parts }}</td>
+               <td>{{ claim.recovery_date }}</td>
+               <td>{{ claim.downtime }}</td>
+               <td>{{ claim.car.machine_serial_number }}</td>
+               <td>{{ claim.service_company.title }}</td>
+           </tr>
+           {% endfor %}
+       </table>
+    {% else %}
+       <h2>Рекламаций нет!</h2>
+   {% endif %}
+{% endblock content %}

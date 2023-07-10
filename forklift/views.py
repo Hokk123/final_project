@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
@@ -8,7 +9,45 @@ from .models import *
 from .filters import ForkliftFilter, ToFilter, ClaimFilter
 
 
-class ForkliftsList(LoginRequiredMixin, ListView):
+#Миксины
+class ForkliftListMixin(object,):
+    model = Forklift
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = super().get_queryset()
+        if user.is_superuser or user.groups.filter(name = 'manager').exists() or not user.is_authenticated:
+            return
+        else:
+            return queryset.filter(Q(client__user = user) | Q(service_company__user = user))
+
+class ToListMixin(object,):
+    model = To
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = super().get_queryset()
+        if user.is_superuser or user.groups.filter(name = 'manager').exists():
+            return 
+        else:
+            return queryset.filter(Q(car__client__user = user) | Q(service_company__user = user))
+        
+        
+class ClaimListMixin(object,):
+    model = Claim
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = super().get_queryset()
+        if user.is_superuser or user.groups.filter(name = 'manager').exists():
+            return 
+        else:
+            return queryset.filter(Q(car__client__user = user) | Q(service_company__user = user))
+
+
+
+#Погрузчики
+class ForkliftsList(LoginRequiredMixin, ListView, ForkliftListMixin):
     #указываем модель, объекты которой мы будем выводить
     model = Forklift
     # form_class = forkliftForm
@@ -130,7 +169,7 @@ class ModelEquipmentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteVi
 
 
 #ТО
-class ToList(LoginRequiredMixin, ListView):
+class ToList(LoginRequiredMixin, ListView, ToListMixin):
     model = To
     template_name = 'forklift/to_list.html'
     context_object_name = 'to'
@@ -361,6 +400,73 @@ class ControlledBridgeModelDelete(LoginRequiredMixin, PermissionRequiredMixin, D
    model = ControlledBridgeModel
    template_name = 'forklift/controlled_bridge_model_delete.html'
    permission_required = 'forklift.delete_controlledbridgemodel'
+
+
+
+#Рекламации
+class ClaimList(LoginRequiredMixin, ListView, ClaimListMixin):
+    model = Claim
+    template_name = 'forklift/claims.html'
+    context_object_name = 'claim'
+    permission_required = 'forklift.view_claim'
+
+
+    def get_queryset(self):
+       queryset = super().get_queryset()
+       self.filterset = ClaimFilter(self.request.GET, queryset)
+       return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+       context = super().get_context_data(**kwargs)
+       context['filterset'] = self.filterset
+       return context
+    
+class ClaimDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = Claim
+    template_name = 'forklift/claim.html'
+    context_object_name = 'claim'
+    permission_required = 'forklift.view_claim'
+
+    def test_func(self):
+       obj = self.get_object()
+       datauser = self.request.user
+       return obj.forklift.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
+
+    def get_context_data(self, **kwargs):
+       context = super().get_context_data(**kwargs)
+       user_in_group_manager = self.request.user.groups.filter(name='manager').exists()
+       context['user_in_group_manager'] = user_in_group_manager
+       user_in_group_service_company = self.request.user.groups.filter(name='service_company').exists()
+       context['user_in_group_service_company'] = user_in_group_service_company
+       return context
+
+class ClaimCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = ClaimForm
+   model = Claim
+   template_name = 'forklift/claim_edit.html'
+   permission_required = 'forklift.add_claim'
+
+class ClaimUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+   form_class = ClaimForm
+   model = Claim
+   template_name = 'forklift/claim_edit.html'
+   permission_required = 'forklift.change_claim'
+
+   def test_func(self):
+       obj = self.get_object()
+       datauser = self.request.user
+       return obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
+
+class ClaimDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+   model = Claim
+   template_name = 'forklift/claim_delete.html'
+   success_url = reverse_lazy('claim_list')
+   permission_required = 'forklift.delete_claim'
+
+   def test_func(self):
+       obj = self.get_object()
+       datauser = self.request.user
+       return obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
 
 
 

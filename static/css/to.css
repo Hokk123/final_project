@@ -1,0 +1,48 @@
+.hr-to {
+    width: 90%;
+    color: #163E6C;
+}
+
+.button {
+    background-color: #D20A11;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #FFFFFF;
+    padding: 10px 18px;
+    font-family: 'Astra Sans Bold',  Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+.buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: raw;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #D20A11;
+    background-color: #d8d8d8;
+}
+
+.a-0 {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.a-0:hover {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #D20A11;
+}
