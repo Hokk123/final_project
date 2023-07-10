@@ -1,0 +1,53 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% load static %}
+
+{% block title %}
+To list
+{% endblock title %}
+ 
+{% block content %}
+<link link href="{% static 'css/default.css'%}" rel="stylesheet" />
+<link link href="{% static 'css/to.css'%}" rel="stylesheet" />
+<br>
+<h5 class="login-title">Информация о проведенном ТО</h5>
+    <hr class="hr-to">
+    {% if to %}
+       <table class="common-table">
+        <thead>
+           <tr>
+               <th> Вид ТО </th>
+               <th> Дата проведения ТО </th>
+               <th> Наработка, м/час </th>
+               <th> № заказ-наряда </th>
+               <th> дата заказ-наряда </th>
+               <th> Организация, проводившая ТО </th>
+               <th> машина </th>
+               <th> сервисная компания </th>
+           </tr>
+        </thead>
+
+        <tbody>
+           <tr>
+                <td><a href="{% url 'controlled_bridge_model_detail' to.forklift.controlled_bridge_model.pk %}">{{ to.type.title }}</a></td>
+                <td>{{ to.date }}</td>
+                <td>{{ to.operating }}</td>
+                <td>{{ to.orders_number }}</td>
+                <td>{{ to.orders_date }}</td>
+                <td>{{ to.organization }}</td>
+                <td><a href="{% url 'forklift_detail' to.forklift.pk %}">{{ to.forklift.machine_serial_number }}</a></td>
+                <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
+           </tr>
+        </tbody>
+       </table>
+    {% else %}
+       <h2>TO не найдено!</h2>
+   {% endif %}
+   {% if user.is_authenticated %}
+   <div class="buttons">
+        <button class="button"><a href="{% url 'to_create' %}" class="a-0">Создать ТО</a></button>
+        <button class="button"><a href="{% url 'to_update' to.pk %}" class="a-0">Редактировать ТО</a></button>
+        <button class="button"><a href="{% url 'to_delete' to.pk %}" class="a-0">Удалить ТО</a></button>
+   </div>
+    {% endif %}
+{% endblock content %}

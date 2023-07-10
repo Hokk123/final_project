@@ -1,0 +1,16 @@
+{% extends '../default.html' %}
+
+{% block content %}
+<h1>Удаление ТО</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Удаляем "{{ object }}"?</p>
+    <input type="submit" value="Delete" />
+</form>
+{% if user.is_superuser or user_in_group_manager %}
+    <button><a href="{% url 'to_create' %}">Создать ТО</a></button>
+    <button><a href="{% url 'to_update' to.pk %}">Редактировать ТО</a></button>
+    <button><a href="{% url 'to_delete' to.pk %}">Удалить ТО</a></button>
+{% endif %}
+{% endblock content %}

@@ -7,7 +7,7 @@ Forklifts
 {% endblock title %}
  
 {% block content %}
-    <link href="{% static 'css/default.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/forklifts.css'%}" rel="stylesheet" />
     <div class="div-yellow">
         {% if user.is_authenticated %}
             {% if user_in_group_manager or user.is_superuser %}
@@ -72,11 +72,6 @@ Forklifts
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="buttons">
-                <button id="table1-button" class="button">Техника</button>
-                <button id="table2-button" class="button">ТО</button>
-                <button id="table3-button" class="button">Рекламации</button>
             </div>
         {% else %}
             <h3 class="title">Проверьте комплектацию и технические характеристики техники Силант</h3>

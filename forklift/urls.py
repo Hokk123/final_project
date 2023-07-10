@@ -29,6 +29,11 @@ urlpatterns = [
     path('forklift/controlled_bridge_model/create/', ControlledBridgeModelCreate.as_view(), name = 'controlled_bridge_model_create'),
     path('forklift/controlled_bridge_model/<int:pk>/update/', ControlledBridgeModelUpdate.as_view(), name = 'controlled_bridge_model_update'),
     path('forklift/controlled_bridge_model/<int:pk>/delete/', ControlledBridgeModelDelete.as_view(), name = 'controlled_bridge_model_delete'),
+    path('to/', ToList.as_view(), name = 'To_list'),
+    path('to/<int:pk>/', ToDetail.as_view(), name = 'To_detail'),
+    path('to/create/', ToCreate.as_view(), name = 'To_create'),
+    path('to/<int:pk>/update/', ToUpdate.as_view(), name = 'To_update'),
+    path('to/<int:pk>/delete/', ToDelete.as_view(), name = 'To_delete'),
     path('forklift/client_detail/<int:pk>/', ClientDetail.as_view(), name = 'client_detail'),
     path('forklift/service_company_detail/<int:pk>/', ServiceCompanyDetail.as_view(), name = 'service_company_detail'),
 ]

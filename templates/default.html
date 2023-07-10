@@ -21,19 +21,38 @@
   <main>
         <div class="header">
           <div class="header-right">
+            <h3 class="title">Проверьте комплектацию и технические характеристики техники Силант</h3>
+            <form class="form-control" action="" method="get">
+              {{filterset.form.non_field_errors}}
+              {{filterset.form.machine_serial_number__icontains.errors }}
+              <input
+                  id="{{filterset.form.machine_serial_number__icontains.id}}"
+                  name="{{filterset.form.machine_serial_number__icontains.name}}"
+                  value="{{filterset.form.machine_serial_number__icontains.id}}"
+                  class="form-control"
+                  placeholder="Заводской номер"
+              >
+              <div class="buttons">
+                <input type="submit" class="button" value="Найти" />
+              </div>
+            </form>
             {% if request.user.is_authenticated %}
               <div class="buttons">
                 <form action="/forklift/">
                   <button type="submit" id="table1-button" data-id="{{ forklift.pk }}" class="button">Показать технику</button>
                 </form>
-                <button id="table2-button" class="button">Показать TO</button>
-                <button id="table3-button" class="button">Показать рекламации</button>
+                <form action="/forklift/">
+                  <button type="submit" id="table2-button" data-id="{{ to.pk }}" class="button">Показать TO</button>
+                </form>
+                <form action="/forklift/">
+                  <button type="submit" id="table3-button" data-id="{{ claim.pk }}" class="button">Показать рекламации</button>
+                </form>
               </div>
             {% endif %}
           </div>
         </div>
      {% block content %}
-     {{ flatpage.content }}
+
      {% endblock content %}
   </main>
   

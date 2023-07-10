@@ -132,8 +132,7 @@ class ModelEquipmentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteVi
 #ТО
 class ToList(LoginRequiredMixin, ListView):
     model = To
-    #template_name = 'forklift/to.html'
-    template_name = 'forklift/forklifts.html'
+    template_name = 'forklift/to_list.html'
     context_object_name = 'to'
     permission_required = 'forklift.view_to'
 
@@ -150,8 +149,7 @@ class ToList(LoginRequiredMixin, ListView):
 
 class ToDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = To
-    #Используем другой шаблон - forklift.html
-    template_name = 'forklift/to.html'
+    template_name = 'forklift/to_list.html'
     context_object_name = 'to'
     permission_required = 'forklift.view_to'
     
@@ -336,7 +334,7 @@ class ControlledBridgeModelDetail(LoginRequiredMixin, UserPassesTestMixin, Detai
          forklifts = Forklift.objects.all()
          for forklift in forklifts:
             controlled_bridge_model = forklift.controlled_bridge_model
-            if(self.get_object() == controlled_bridge_model and (forklift.client.user == ruser or forklift.service_company.user == ruser)):
+            if(self.get_object() == controlled_bridge_model and (forklift.client.user == datauser or forklift.service_company.user == datauser)):
                return True
          return False
       
