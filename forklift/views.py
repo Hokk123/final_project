@@ -50,7 +50,7 @@ class ClaimListMixin(object,):
 class ForkliftsList(LoginRequiredMixin, ListView, ForkliftListMixin):
     #указываем модель, объекты которой мы будем выводить
     model = Forklift
-    # form_class = forkliftForm
+    form_class = ForkliftForm
     # #поле, которое будет использоваться для сортировки объектов
     ordering = '-date_of_shipment'
     #указываем имя шаблона, в котором будут все инструкции о том

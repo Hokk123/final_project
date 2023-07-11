@@ -59,7 +59,6 @@
     margin: 0;
     margin-left: 3px;
     padding: 3px;
-    background: transparent url('../img/search_button.svg') no-repeat scroll 0 0;
     background-size: 28px 28px;
     background-position: center;
     background-color: #EBE6D6 !important;
@@ -98,6 +97,172 @@
 .button-2 {
     padding-top:5px;
 }
+
+.login-title {
+    text-align: center;
+    font-family: 'Astra Sans Regular',  Arial, Helvetica, sans-serif;
+    font-size: 15pt;
+    color: #163E6C;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 25px;
+}
+.common-table {
+    margin: auto;
+    width: 100%;
+    margin-bottom: 1.5em;
+    border-spacing: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+@media (max-width: 1000px) {
+    .common-table {
+        overflow-x: scroll;
+    }
+}
+
+@media (min-width: 48em) {
+    .common-table {
+        font-size: 0.9em;
+    }
+}
+
+ @media (min-width: 62em) {
+    .common-table {
+        font-size: 1em;
+    }
+}
+
+.common-table thead {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    padding: 0;
+    border: 0;
+    height: 1px; 
+    width: 1px; 
+    overflow: hidden;
+}
+        
+@media (min-width: 48em) {
+    .common-table thead {
+        position: relative;
+        clip: auto;
+        height: auto;
+        width: auto;
+        overflow: auto;
+    }
+}
+
+.common-table th {
+    background-color: #163E6C;
+    border: 1px solid #1a4d89;
+    font-weight: normal;
+    text-align: center;
+    color: white;
+}
+
+.common-table th:first-of-type {
+    text-align: left;
+}
+
+.common-table tr, td, th {
+    display: block;
+    padding: 0;
+    text-align: left;
+    white-space: normal;
+}
+
+@media (min-width: 48em) {
+    .common-table tr {
+        display: table-row;
+    }
+}
+
+.common-table th, td {
+    padding: 0.5em;
+    vertical-align: middle;
+}
+
+@media (min-width: 30em) {
+    .common-table th, td {
+        padding: 0.75em 0.5em;
+    }
+}
+
+@media (min-width: 48em) {
+    .common-table th, td {
+        display: table-cell;
+        padding: 0.5em;
+    }
+}
+
+@media (min-width: 62em) {
+    .common-table th, td {
+        padding: 0.75em 0.5em;
+    }
+}
+
+@media (min-width: 75em) {
+    .common-table th, td {
+        padding: 0.75em;
+    }
+}
+
+@media (min-width: 48em) {
+    .common-table tbody {
+        display: table-row-group;
+    }
+}
+
+.common-table tbody tr {
+    margin-bottom: 1em;
+}
+
+@media (min-width: 48em) {
+    .common-table tbody tr {
+        display: table-row;
+        border-width: 1px;
+    }
+}
+
+.common-table tbody tr:last-of-type {
+    margin-bottom: 0;
+}
+
+@media (min-width: 48em) {
+    .common-table tbody tr:nth-of-type(even) {
+       background-color: #EBE6D6;
+    }   
+}
+
+.common-table tbody td {
+    text-align: center;
+}
+
+@media (min-width: 48em) {
+    .common-table tbody td {
+        border-left: 1px solid  #163E6C;
+        border-bottom: 1px solid #163E6C;
+        text-align: center;
+    }
+
+    .common-table tbody td:last-of-type {
+        border-right: 1px solid #163E6C;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #D20A11;
+    background-color:#ededed
+}
+
 
 .label-login {
     font-family: 'Astra Sans Regular',  Arial, Helvetica, sans-serif;
