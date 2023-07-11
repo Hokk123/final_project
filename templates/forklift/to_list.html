@@ -29,13 +29,13 @@ To list
 
         <tbody>
            <tr>
-                <td><a href="{% url 'controlled_bridge_model_detail' to.forklift.controlled_bridge_model.pk %}">{{ to.type.title }}</a></td>
+                <td><a href="{% url 'type_to_detail' to.type.pk %}">{{ to.type.title }}</a></td>
                 <td>{{ to.date }}</td>
                 <td>{{ to.operating }}</td>
                 <td>{{ to.orders_number }}</td>
                 <td>{{ to.orders_date }}</td>
                 <td>{{ to.organization }}</td>
-                <td><a href="{% url 'forklift_detail' to.forklift.pk %}">{{ to.forklift.machine_serial_number }}</a></td>
+                <td><a href="{% url 'forklift_detail' to.car.pk %}">{{ to.car.machine_serial_number }}</a></td>
                 <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
            </tr>
         </tbody>

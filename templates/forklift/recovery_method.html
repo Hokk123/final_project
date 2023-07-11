@@ -1,0 +1,29 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Способ восстановления
+{% endblock title %}
+
+{% block content %}
+<br>
+<h5>Информация о способе восстановления</h5>
+<hr>
+{% if recovery_method %}
+<div>
+    <h5>Название:</h5>
+    <p>{{recovery_method.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{recovery_method.description }}</p>
+</div>
+{% else %}
+<h2>Способ восстановления отсутсвует!</h2>
+{% endif %}
+</hr>
+{% if user.is_superuser or user_in_group_manager %}
+    <button><a href="{% url 'recovery_method_create' %}">Создать способ восстановления</a></button>
+    <button><a href="{% url 'recovery_method_update' recovery_method.pk %}">Редактировать способ восстановления</a></button>
+    <button><a href="{% url 'recovery_method_delete' recovery_method.pk %}">Удалить способ восстановления</a></button>
+{% endif %}
+{% endblock content %}

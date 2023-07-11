@@ -1,0 +1,29 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% block title %}
+Вид ТО
+{% endblock title %}
+
+{% block content %}
+<br>
+<h5>Информация о виде ТО</h5>
+<hr>
+{% if type_to %}
+<div>
+    <h5>Название:</h5>
+    <p>{{type_to.title }}</p>
+</div>
+<div>
+    <h5>Описание:</h5>
+    <p>{{type_to.description }}</p>
+</div>
+{% else %}
+<h2>Вид ТО отсутсвует!</h2>
+{% endif %}
+</hr>
+{% if user.is_superuser or user_in_group_manager %}
+    <button><a href="{% url 'type_to_create' %}">Создать вид ТО</a></button>
+    <button><a href="{% url 'type_to_update' type_to.pk %}">Редактировать вид ТО</a></button>
+    <button><a href="{% url 'type_to_delete' type_to.pk %}">Удалить вид ТО</a></button>
+{% endif %}
+{% endblock content %}

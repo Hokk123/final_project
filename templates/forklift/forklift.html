@@ -14,8 +14,8 @@ Forklift
     <p class="login-title">Заводской номер: {{ forklift.machine_serial_number }}</p>
     <div class="buttons">
         <button id="table1-button" data-id="{{ forklift.pk }}" class="button">Показать машину</button>
-        <button id="table2-button" class="button">Показать TO</button>
-        <button id="table3-button" class="button">Показать рекламации</button>
+        <button id="table2-button" data-id="{{ to.pk }}" class="button">Показать TO</button>
+        <button id="table3-button" data-id="{{ claim.pk }}" class="button">Показать рекламации</button>
     </div>
         <hr>
     <div id="table-container">

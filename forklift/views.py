@@ -195,7 +195,7 @@ class ToDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     def test_func(self):
        obj = self.get_object()
        datauser = self.request.user
-       return obj.forklift.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
+       return obj.car.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
 
 class ToCreate(LoginRequiredMixin, CreateView):
    form_class = ToForm
@@ -212,7 +212,7 @@ class ToUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
    def test_func(self):
        obj = self.get_object()
        datauser = self.request.user
-       return obj.forklift.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
+       return obj.car.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
 
 class ToDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
    model = To
@@ -223,7 +223,50 @@ class ToDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
    def test_func(self):
        obj = self.get_object()
        datauser = self.request.user
-       return obj.forklift.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
+       return obj.car.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
+
+
+#Тип ТО
+class TypeToDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+   model = TypeTo
+   template_name = 'forklift/type_to.html'
+   context_object_name = 'type_to'
+
+   def test_func(self):
+      datauser = self.request.user
+      if(datauser.is_superuser or datauser.groups.filter(name='manager').exists()):
+         return True
+      else:
+         tos = to.objects.all()
+         for to in tos:
+            type_to = to.type_to
+            if(self.get_object() == type_to and (to.car.client.user == datauser or to.service_company.user == datauser)):
+               return True
+         return False
+      
+   def get_context_data(self, **kwargs):
+       context = super().get_context_data(**kwargs)
+       user_in_group_manager = self.request.user.groups.filter(name='manager').exists()
+       context['user_in_group_manager'] = user_in_group_manager
+       return context
+      
+class TypeToCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = TypeToForm
+   model = TypeTo
+   template_name = 'forklift/type_to_edit.html'
+   permission_required = 'forklift.add_typeofto'
+
+class TypeToUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = TypeToForm
+   model = TypeTo
+   template_name = 'forklift/type_to_edit.html'
+   permission_required = 'forklift.change_typeofto'
+
+class TypeToDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   form_class = TypeToForm
+   model = TypeTo
+   template_name = 'forklift/type_to_delete.html'
+   permission_required = 'forklift.delete_typeofto'
 
 
 
@@ -467,6 +510,93 @@ class ClaimDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
        obj = self.get_object()
        datauser = self.request.user
        return obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
+
+
+#Характер отказа
+class NatureRefusalDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+   model = NatureRefusal
+   template_name = 'forklift/nature_failure.html'
+   context_object_name = 'nature_failure'
+
+   def test_func(self):
+      datauser = self.request.user
+      if(datauser.is_superuser or datauser.groups.filter(name='manager').exists()):
+         return True
+      else:
+         claims = Claim.objects.all()
+         for claim in claims:
+            nature_failure = claim.order_note
+            if(self.get_object() == nature_failure and (claim.car.client.user == datauser or claim.service_company.user == datauser)):
+               return True
+         return False
+      
+   def get_context_data(self, **kwargs):
+       context = super().get_context_data(**kwargs)
+       user_in_group_manager = self.request.user.groups.filter(name='manager').exists()
+       context['user_in_group_manager'] = user_in_group_manager
+       return context
+      
+class NatureRefusalCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = NatureRefusalForm
+   model = NatureRefusal
+   template_name = 'forklift/nature_failure_edit.html'
+   permission_required = 'forklift.add_NatureRefusal'
+
+class NatureRefusalUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = NatureRefusalForm
+   model = NatureRefusal
+   template_name = 'forklift/nature_failure_edit.html'
+   permission_required = 'forklift.change_NatureRefusal'
+
+class NatureRefusalDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   form_class = NatureRefusalForm
+   model = NatureRefusal
+   template_name = 'forklift/nature_failure_delete.html'
+   permission_required = 'forklift.delete_NatureRefusal'
+
+
+
+#Способ восстановления
+class RecoveryMethodDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+   model = RecoveryMethod
+   template_name = 'forklift/recovery_method.html'
+   context_object_name = 'recovery_method'
+
+   def test_func(self):
+      datauser = self.request.user
+      if(datauser.is_superuser or datauser.groups.filter(name='manager').exists()):
+         return True
+      else:
+         claims = Claim.objects.all()
+         for claim in claims:
+            recovery_method = claim.recovery_method
+            if(self.get_object() == recovery_method and (claim.car.client.user == datauser or claim.service_company.user == datauser)):
+               return True
+         return False
+      
+   def get_context_data(self, **kwargs):
+       context = super().get_context_data(**kwargs)
+       user_in_group_manager = self.request.user.groups.filter(name='manager').exists()
+       context['user_in_group_manager'] = user_in_group_manager
+       return context
+      
+class RecoveryMethodCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+   form_class = RecoveryMethodForm
+   model = RecoveryMethod
+   template_name = 'forklift/recovery_method_edit.html'
+   permission_required = 'forklift.add_recoverymethod'
+
+class RecoveryMethodUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+   form_class = RecoveryMethodForm
+   model = RecoveryMethod
+   template_name = 'forklift/recovery_method_edit.html'
+   permission_required = 'forklift.change_recoverymethod'
+
+class RecoveryMethodDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+   form_class = RecoveryMethodForm
+   model = RecoveryMethod
+   template_name = 'forklift/recovery_method_delete.html'
+   permission_required = 'forklift.delete_recoverymethod'
 
 
 
