@@ -1,0 +1,47 @@
+{% extends '../default.html' %}
+{% csrf_token %}
+{% load static %}
+
+{% block title %}
+tos
+{% endblock title %}
+ 
+{% block content %}
+<link link href="{% static 'css/forklifts.css'%}" rel="stylesheet" />
+   <h1>Все TO</h1>
+   <form action = "" method = "get">
+       {{ filterset.form.as_p}}
+       <input type = "submit" valut = "Найти" />
+    </form>
+
+    <hr>
+    {% if tos %}
+       <table class="common-table">
+           <tr>
+               <td> Вид ТО </td>
+               <td> Дата проведения ТО </td>
+               <td> Наработка, м/час </td>
+               <td> № заказ-наряда </td>
+               <td> дата заказ-наряда </td>
+               <td> Организация, проводившая ТО </td>
+               <td> зав. N. машины </td>
+               <td> сервисная компания </td>
+           </tr>
+
+           {% for to in tos %}
+           <tr>
+                <td>{{ to.type.title }}</td>
+                <td>{{ to.date }}</td>
+                <td>{{ to.operating }}</td>
+                <td>{{ to.orders_number }}</td>
+                <td>{{ to.orders_date }}</td>
+                <td>{{ to.organization }}</td>
+                <td>{{ to.car.machine_serial_number }}</td>
+                <td>{{ to.service_company.title }}</td>
+           </tr>
+           {% endfor %}
+       </table>
+    {% else %}
+       <h2>TO не найдено!</h2>
+   {% endif %}
+{% endblock content %}

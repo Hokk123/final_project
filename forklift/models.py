@@ -140,9 +140,6 @@ class To(models.Model): #TO
     
     class Meta:
         ordering = ['-date']
-
-    def get_absolute_url(self):
-        return reverse('to_detail', args = [str(self.id)])
     
     def __str__(self):
         return self.orders_number
@@ -162,9 +159,6 @@ class Claim(models.Model):  #рекламация
 
     class Meta:
         ordering = ['-orders_date']
-
-    def get_absolute_url(self):
-        return reverse('claim_detail', args = [str(self.id)])
     
     def __str__(self):
         return self.order_description

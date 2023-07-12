@@ -161,49 +161,45 @@ Forklifts
                 {% endif %}
             {% endif %}
         </table> 
-
+        
+        <h2 id="table_header_2" class="login-title">Информация о проведенных ТО Вашей техники</h2>
         <table id = "table2" class="common-table">
-        <h2 id="table_header_2" style="display:none;" class="login-title">Информация о проведенных ТО Вашей техники</h2>
-        {% if tos %}
-            <thead>
-                <tr>
-                    <th> № </th>
-                    <th> Вид ТО </th>
-                    <th> Дата проведения ТО </th>
-                    <th> Наработка, м/час </td>
-                    <th> № заказ-наряда </th>
-                    <th> дата заказ-наряда </th>
-                    <th> Организация, проводившая ТО </th>
-                    <th> зав. N. машины </th>
-                    <th> сервисная компания </th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for to in tos %}
-                <tr>
-                    <td><a href="{% url 'to_detail' to.pk %}">{{ forloop.counter }}</a></td>
-                    <td><a href="{% url 'type_of_to_detail' to.type.pk %}">{{ to.type.title }}</a></td>
-                    <td>{{ to.date }}</td>
-                    <td>{{ to.operating }}</td>
-                    <td>{{ to.orders_number }}</td>
-                    <td>{{ to.orders_date }}</td>
-                    <td>{{ to.organization }}</td>
-                    <td><a href="{% url 'forklift_detail' to.forklift.pk %}">{{ to.forklift.machine_serial_number }}</a></td>
-                    <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        {% else %}
-                {% if page_obj.number == 1 %}
+            {% if tos %}
+                <thead>
                     <tr>
-                        <td colspan="8">ТО не найдено!</td>
+                        <th> № </th>
+                        <th> Вид ТО </th>
+                        <th> Дата проведения ТО </th>
+                        <th> Наработка, м/час </td>
+                        <th> № заказ-наряда </th>
+                        <th> дата заказ-наряда </th>
+                        <th> Организация, проводившая ТО </th>
+                        <th> зав. N. машины </th>
+                        <th> сервисная компания </th>
                     </tr>
-                {% endif %}
-        {% endif %}
-        </table>
+                </thead>
+                <tbody>
+                {% for to in tos %}
+                    <tr>
+                        <td><a href="{% url 'to_detail' to.pk %}">{{ forloop.counter }}</a></td>
+                        <td><a href="{% url 'type_of_to_detail' to.type.pk %}">{{ to.type.title }}</a></td>
+                        <td>{{ to.date }}</td>
+                        <td>{{ to.operating }}</td>
+                        <td>{{ to.orders_number }}</td>
+                        <td>{{ to.orders_date }}</td>
+                        <td>{{ to.organization }}</td>
+                        <td><a href="{% url 'forklift_detail' to.forklift.pk %}">{{ to.forklift.machine_serial_number }}</a></td>
+                        <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            {% else %}
+                <h2 id="table_header_2" class="login-title">Tos none</h2>
+            {% endif %}
+            </table>
 
         <table id = "table3" class="common-table">
-        <h5 id="table_header_3" style="display:none;" class="login-title">Информация о рекламациях Вашей техники</h5>
+        <h5 id="table_header_3" class="login-title">Информация о рекламациях Вашей техники</h5>
         {% if claims %}
         <tr>
             <th> № </th>

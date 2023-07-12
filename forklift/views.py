@@ -171,8 +171,8 @@ class ModelEquipmentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteVi
 #ТО
 class ToList(LoginRequiredMixin, ListView, ToListMixin):
     model = To
-    template_name = 'forklift/to_list.html'
-    context_object_name = 'to'
+    template_name = 'forklift/to_lists.html'
+    context_object_name = 'tos'
     permission_required = 'forklift.view_to'
 
     def get_queryset(self):
@@ -254,19 +254,19 @@ class TypeToCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
    form_class = TypeToForm
    model = TypeTo
    template_name = 'forklift/type_to_edit.html'
-   permission_required = 'forklift.add_typeofto'
+   permission_required = 'forklift.add_typeto'
 
 class TypeToUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
    form_class = TypeToForm
    model = TypeTo
    template_name = 'forklift/type_to_edit.html'
-   permission_required = 'forklift.change_typeofto'
+   permission_required = 'forklift.change_typeto'
 
 class TypeToDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
    form_class = TypeToForm
    model = TypeTo
    template_name = 'forklift/type_to_delete.html'
-   permission_required = 'forklift.delete_typeofto'
+   permission_required = 'forklift.delete_typeto'
 
 
 
