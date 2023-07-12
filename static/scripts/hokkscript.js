@@ -28,13 +28,13 @@ function updateTable(url, header1, header2, header3) {
   }
 
 document.querySelector('#table1-button').addEventListener('click', () => {
-    updateTable('/cars/', 'block', 'none', 'none');
+    updateTable('/forklifts/', 'block', 'none', 'none');
   });
   
   document.querySelector('#table2-button').addEventListener('click', () => {
-    updateTable('/maintenances/', 'none', 'block', 'none');
+    updateTable('/tos/', 'none', 'block', 'none');
   });
   
   document.querySelector('#table3-button').addEventListener('click', () => {
-    updateTable('/complaints/', 'none', 'none', 'block');
+    updateTable('/claims/', 'none', 'none', 'block');
   });

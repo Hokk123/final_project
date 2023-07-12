@@ -105,7 +105,7 @@ Forklifts
                 <th> Модель управляемого моста </th>
                 <th> Зав. № управляемого моста </th>
                 {% if user.is_authenticated %}
-                    <th> Договор доставки №, дата </th>
+                    <th> Договор поставки №, дата </th>
                     <th> Дата отгрузки с завода </th>
                     <th> Грузополучатель (конечный потребитель) </th>
                     <th> Адрес поставки (эксплуатации) </th>
@@ -161,7 +161,7 @@ Forklifts
                 {% endif %}
             {% endif %}
         </table> 
-        
+
         <h2 id="table_header_2" class="login-title">Информация о проведенных ТО Вашей техники</h2>
         <table id = "table2" class="common-table">
             {% if tos %}
