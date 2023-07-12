@@ -473,7 +473,7 @@ class ClaimDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     def test_func(self):
        obj = self.get_object()
        datauser = self.request.user
-       return obj.forklift.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
+       return obj.car.client.user == datauser or obj.service_company.user == datauser or datauser.is_superuser or datauser.groups.filter(name='manager').exists()
 
     def get_context_data(self, **kwargs):
        context = super().get_context_data(**kwargs)

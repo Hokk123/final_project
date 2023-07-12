@@ -47,6 +47,10 @@ urlpatterns = [
     path('claim/nature_failure/create/', NatureRefusalCreate.as_view(), name = 'nature_failure_create'),
     path('claim/nature_failure/<int:pk>/update/', NatureRefusalUpdate.as_view(), name = 'nature_failure_update'),
     path('claim/nature_failure/<int:pk>/delete/', NatureRefusalDelete.as_view(), name = 'nature_failure_delete'),
+    path('claim/recovery_method_detail/<int:pk>/', RecoveryMethodDetail.as_view(), name = 'recovery_method_detail'),
+    path('claim/recovery_method/create/', RecoveryMethodCreate.as_view(), name = 'recovery_method_create'),
+    path('claim/recovery_method/<int:pk>/update/', RecoveryMethodUpdate.as_view(), name = 'recovery_method_update'),
+    path('claim/recovery_method/<int:pk>/delete/', RecoveryMethodDelete.as_view(), name = 'recovery_method_delete'),
     path('forklift/client_detail/<int:pk>/', ClientDetail.as_view(), name = 'client_detail'),
     path('forklift/service_company_detail/<int:pk>/', ServiceCompanyDetail.as_view(), name = 'service_company_detail'),
 ]

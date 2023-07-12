@@ -116,7 +116,6 @@ Forklifts
             </tr>
             </thead>
 
-
             <tbody>
             {% for forklift in forklifts %}
             <tr>
@@ -154,11 +153,7 @@ Forklifts
             {% endfor %}
             </tbody>
             {% else %}
-                {% if page_obj.number == 1 %}
-                    <tr>
-                        <td colspan="17">Машин нет!</td>
-                    </tr>
-                {% endif %}
+                <h2 id="table_header_2" style="display:block;" class="login-title">Техники нет.</h2>
             {% endif %}
         </table> 
 
@@ -188,7 +183,7 @@ Forklifts
                         <td>{{ to.orders_number }}</td>
                         <td>{{ to.orders_date }}</td>
                         <td>{{ to.organization }}</td>
-                        <td><a href="{% url 'forklift_detail' to.forklift.pk %}">{{ to.forklift.machine_serial_number }}</a></td>
+                        <td><a href="{% url 'forklift_detail' to.forklift.pk %}">{{ to.car.machine_serial_number }}</a></td>
                         <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
                     </tr>
                 {% endfor %}
@@ -198,7 +193,7 @@ Forklifts
             {% endif %}
             </table>
 
-        <table id = "table3" class="common-table">
+        <table id = "table3" style="display:block;" class="common-table">
         <h5 id="table_header_3" class="login-title">Информация о рекламациях Вашей техники</h5>
         {% if claims %}
         <tr>
@@ -231,11 +226,7 @@ Forklifts
         </tr>
         {% endfor %}
         {% else %}
-            {% if page_obj.number == 1 %}
-                <tr>
-                    <td colspan="10">Рекламаций нет!</td>
-                </tr>
-            {% endif %}
+            <h2 id="table_header_2" class="login-title">Рекламаций нет.s</h2>
         {% endif %}
         </table>
     </div>

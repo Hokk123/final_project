@@ -8,7 +8,7 @@ Claim
 {% block content %}
    <h1>Все рекламации</h1>
 
-   <form action = "" method = "get">
+    <form action = "" method = "get">
        {{ filterset.form.as_p}}
        <input type = "submit" valut = "Найти" />
     </form>
@@ -45,6 +45,6 @@ Claim
            {% endfor %}
        </table>
     {% else %}
-       <h2>Рекламаций нет!</h2>
+       <h2>Рекламаций нет!s</h2>
    {% endif %}
 {% endblock content %}

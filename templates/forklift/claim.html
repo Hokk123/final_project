@@ -27,19 +27,19 @@ Claim
            <tr>
                 <td>{{ claim.orders_date }}</td>
                 <td>{{ claim.operating }}</td>
-                <td><a href="{% url 'order_note_detail' claim.order_note.pk %}">{{ claim.order_note.title }}</a></td>
+                <td><a href="{% url 'nature_failure_detail' claim.order_note.pk %}">{{ claim.order_note.title }}</a></td>
                 <td>{{ claim.order_description }}</td>
                 <td><a href="{% url 'recovery_method_detail' claim.recovery_method.pk %}">{{ claim.recovery_method.title }}</a></td>
                 <td>{{ claim.used_spare_parts }}</td>
                 <td>{{ claim.recovery_date }}</td>
                 <td>{{ claim.downtime }}</td>
-                <td><a href="{% url 'forklift_detail' claim.forklift.pk %}">{{ claim.forklift.machine_serial_number }}</a></td>
+                <td><a href="{% url 'forklift_detail' claim.car.pk %}">{{ claim.forklift.machine_serial_number }}</a></td>
                 <td><a href="{% url 'service_company_detail' claim.service_company.pk %}">{{ claim.service_company.title }}</a></td>
            </tr>
-       </table> <!-- ... и таблицы -->
+       </table>
     {% else %}
-       <h2>Рекламаций нет!</h2>
-   {% endif %}
+       <h2>Рекламаций нет!-</h2>
+    {% endif %}
     {% if user.is_superuser or user_in_group_manager or user_in_group_service_company %}
         <button><a href="{% url 'claim_create' %}">Создать рекламацию</a></button>
         <button><a href="{% url 'claim_update' claim.pk %}">Редактировать рекламацию</a></button>

@@ -30,6 +30,7 @@ class ClaimFilter(FilterSet):
     class Meta:
         model = Claim
         fields = {
+            'car__machine_serial_number': ['icontains'],
             'order_note__title': ['icontains'],
             'recovery_method__title': ['icontains'],
             'service_company__title': ['icontains'],
