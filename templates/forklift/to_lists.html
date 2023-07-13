@@ -8,38 +8,43 @@ tos
  
 {% block content %}
 <link link href="{% static 'css/forklifts.css'%}" rel="stylesheet" />
-   <h1>Все TO</h1>
-   <form action = "" method = "get">
+   <h2>Все TO</h2>
+   
+    <form action = "" method = "get">
        {{ filterset.form.as_p}}
        <input type = "submit" valut = "Найти" />
     </form>
 
     <hr>
     {% if tos %}
-       <table class="common-table">
-           <tr>
-               <td> Вид ТО </td>
-               <td> Дата проведения ТО </td>
-               <td> Наработка, м/час </td>
-               <td> № заказ-наряда </td>
-               <td> дата заказ-наряда </td>
-               <td> Организация, проводившая ТО </td>
-               <td> зав. N. машины </td>
-               <td> сервисная компания </td>
-           </tr>
-
-           {% for to in tos %}
-           <tr>
-                <td>{{ to.type.title }}</td>
+       <table id = "table1" class="common-table">
+        <thead>
+            <tr>
+                <th> № </th>
+                <th> Вид ТО </th>
+                <th> Дата проведения ТО </th>
+                <th> Наработка, м/час </td>
+                <th> № заказ-наряда </th>
+                <th> дата заказ-наряда </th>
+                <th> Организация, проводившая ТО </th>
+                <th> зав. N. машины </th>
+                <th> сервисная компания </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for to in tos %}
+            <tr>
+                <td><a href="{% url 'to_detail' to.pk %}">{{ forloop.counter }}</a></td>
+                <td><a href="{% url 'type_to_detail' to.type.pk %}">{{ to.type.title }}</a></td>
                 <td>{{ to.date }}</td>
                 <td>{{ to.operating }}</td>
                 <td>{{ to.orders_number }}</td>
                 <td>{{ to.orders_date }}</td>
                 <td>{{ to.organization }}</td>
-                <td>{{ to.car.machine_serial_number }}</td>
-                <td>{{ to.service_company.title }}</td>
-           </tr>
-           {% endfor %}
+                <td><a href="{% url 'to_detail' to.car.pk %}">{{ to.car.machine_serial_number }}</a></td>
+                <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
+            </tr>
+        {% endfor %}
        </table>
     {% else %}
        <h2>TO не найдено!</h2>

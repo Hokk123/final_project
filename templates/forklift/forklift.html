@@ -57,7 +57,7 @@ Forklift
                 <td>{{ forklift.drive_axle_serial_number }}</td>
                 <td><a href="{% url 'controlled_bridge_model_detail' forklift.controlled_bridge_model.pk %}">{{ forklift.controlled_bridge_model.title }}</a></td>
                 <td>{{ forklift.controlled_bridge_serial_number }}</td>
-                <td>{{ forklift.supply_contract }}</td>
+                <td>{{ forklift.delivery_contract }}</td>
                 <td>{{ forklift.date_of_shipment }}</td>
                 <td>{{ forklift.end_user }}</td>
                 <td>{{ forklift.delivery_address|truncatechars:20 }}</td>

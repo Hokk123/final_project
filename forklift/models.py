@@ -129,14 +129,14 @@ class Forklift(models.Model):  #вилочный погрузчик
 
 
 class To(models.Model): #TO
-    type = models.ForeignKey(TypeTo, on_delete = models.CASCADE) #вид ТО
-    date = models.DateField() #дата проведения ТО
-    operating = models.PositiveIntegerField(default = 0) #наработка, м/час
-    orders_number = models.CharField(max_length = 32) #№ заказ-наряда
-    orders_date = models.DateField() #дата заказ-наряда
-    organization = models.CharField(max_length = 32) #организация, проводившая ТО
-    car = models.ForeignKey(Forklift, on_delete = models.CASCADE) #машина (база данных машин)
-    service_company = models.ForeignKey(Service_Company, on_delete = models.CASCADE) #сервисная компания
+    type = models.ForeignKey(TypeTo, verbose_name='Вид Тo', on_delete = models.CASCADE) #вид ТО
+    date = models.DateField(verbose_name='Дата проведения ТО') #дата проведения ТО
+    operating = models.PositiveIntegerField(default = 0, verbose_name='Наработка, м/час') #наработка, м/час
+    orders_number = models.CharField(max_length = 32, verbose_name='№ заказ-наряда') #№ заказ-наряда
+    orders_date = models.DateField(verbose_name='дата заказ-наряда') #дата заказ-наряда
+    organization = models.CharField(max_length = 32, verbose_name='Организация, проводившая ТО',) #организация, проводившая ТО
+    car = models.ForeignKey(Forklift, verbose_name='Зав. № машины', on_delete = models.CASCADE) #машина (база данных машин)
+    service_company = models.ForeignKey(Service_Company, verbose_name='Сервисная компания', on_delete = models.CASCADE) #сервисная компания
     
     class Meta:
         ordering = ['-date']
@@ -146,16 +146,16 @@ class To(models.Model): #TO
     
 
 class Claim(models.Model):  #рекламация
-    orders_date = models.DateField() #дата отказа
-    operating = models.PositiveIntegerField(default = 0) #наработка, м/час
-    order_note = models.ForeignKey(NatureRefusal, on_delete = models.CASCADE) #узел отказа
-    order_description = models.TextField() #описание отказа
-    recovery_method = models.ForeignKey(RecoveryMethod, on_delete = models.CASCADE) #способ восстановления
-    used_spare_parts = models.TextField() #используемые запасные части
-    recovery_date = models.DateField() #дата восстановления
-    downtime = models.IntegerField(default = 0) #время простоя техники
-    car = models.ForeignKey(Forklift, on_delete = models.CASCADE) #машина (база данных машин)
-    service_company = models.ForeignKey(Service_Company, on_delete = models.CASCADE) #сервисная компания
+    orders_date = models.DateField(verbose_name='Дата отказа') #дата отказа
+    operating = models.PositiveIntegerField(default = 0, verbose_name='Наработка, м/час',) #наработка, м/час
+    order_note = models.ForeignKey(NatureRefusal, verbose_name='Узел отказа', on_delete = models.CASCADE) #узел отказа
+    order_description = models.TextField(verbose_name='Описание отказа') #описание отказа
+    recovery_method = models.ForeignKey(RecoveryMethod, verbose_name='Способ восстановления', on_delete = models.CASCADE) #способ восстановления
+    used_spare_parts = models.TextField(verbose_name='Используемые запасные части') #используемые запасные части
+    recovery_date = models.DateField(verbose_name='Дата восстановления') #дата восстановления
+    downtime = models.IntegerField(default = 0, verbose_name='Время простоя техники') #время простоя техники
+    car = models.ForeignKey(Forklift, verbose_name='Зав. № машины', on_delete = models.CASCADE) #машина (база данных машин)
+    service_company = models.ForeignKey(Service_Company, verbose_name='Сервисная компания', on_delete = models.CASCADE) #сервисная компания
 
     class Meta:
         ordering = ['-orders_date']

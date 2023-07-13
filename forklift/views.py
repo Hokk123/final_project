@@ -450,7 +450,7 @@ class ControlledBridgeModelDelete(LoginRequiredMixin, PermissionRequiredMixin, D
 class ClaimList(LoginRequiredMixin, ListView, ClaimListMixin):
     model = Claim
     template_name = 'forklift/claims.html'
-    context_object_name = 'claim'
+    context_object_name = 'claims'
     permission_required = 'forklift.view_claim'
 
 

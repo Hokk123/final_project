@@ -23,7 +23,7 @@ Forklifts
                     <form action="" method="get" class="form-login">
                         {{filterset.form.non_field_errors}}
                         {{filterset.form.model_equipment__title__icontains.errors }}
-                        <label for="{{filterset.form.model_equipment__title__icontains.id_for_label}}" class="label-login">Модель техники</label>
+                        <label for="{{filterset.form.model_equipment__title__icontains.id_for_label}}" class="label-login">Модель погрузчика</label>
                         <input 
                             id="{{filterset.form.model_equipment__title__icontains.id}}"
                             name="{{filterset.form.model_equipment__title__icontains.name}}"
@@ -130,7 +130,7 @@ Forklifts
                         <td>{{ forklift.drive_axle_serial_number }}</td>
                         <td><a href="{% url 'controlled_bridge_model_detail' forklift.controlled_bridge_model.pk %}">{{ forklift.controlled_bridge_model.title }}</a></td>
                         <td>{{ forklift.controlled_bridge_serial_number }}</td>
-                        <td>{{ forklift.supply_contract }}</td>
+                        <td>{{ forklift.delivery_contract }}</td>
                         <td>{{ forklift.date_of_shipment }}</td>
                         <td>{{ forklift.end_user }}</td>
                         <td>{{ forklift.delivery_address|truncatechars:20 }}</td>
@@ -157,7 +157,7 @@ Forklifts
             {% endif %}
         </table> 
 
-        <h2 id="table_header_2" class="login-title">Информация о проведенных ТО Вашей техники</h2>
+        <h2 id="table_header_2" class="login-title"><a href="{% url 'to_list' %}">Информация о проведенных ТО Вашей техники</a></h2>
         <table id = "table2" class="common-table">
             {% if tos %}
                 <thead>
@@ -189,12 +189,12 @@ Forklifts
                 {% endfor %}
                 </tbody>
             {% else %}
-                <h2 id="table_header_2" class="login-title">Tos none</h2>
+                <h2 id="table_header_2" class="login-title" style="display:none;">To нет.</h2>
             {% endif %}
             </table>
 
         <table id = "table3" style="display:block;" class="common-table">
-        <h5 id="table_header_3" class="login-title">Информация о рекламациях Вашей техники</h5>
+        <h5 id="table_header_3" class="login-title"><a href="{% url 'claim_list' %}">Информация о рекламациях Вашей техники</a></h5>
         {% if claims %}
         <tr>
             <th> № </th>
@@ -226,7 +226,7 @@ Forklifts
         </tr>
         {% endfor %}
         {% else %}
-            <h2 id="table_header_2" class="login-title">Рекламаций нет.s</h2>
+            <h2 id="table_header_2" class="login-title" style="display:none;">Рекламаций нет.</h2>
         {% endif %}
         </table>
     </div>
