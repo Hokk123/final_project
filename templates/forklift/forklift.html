@@ -14,9 +14,9 @@ Forklift
     <p class="login-title">Машина: {{ forklift.model_equipment.title }}</p>
     <p class="login-title">Заводской номер: {{ forklift.machine_serial_number }}</p>
     <div class="buttons">
-        <button id="table1-button" data-id="{{ forklift.pk }}" class="button">Показать машину</button>
-        <button id="table2-button" data-id="{{ to.pk }}" class="button">Показать TO</button>
-        <button id="table3-button" data-id="{{ claim.pk }}" class="button">Показать рекламации</button>
+        <button id="table1-button" class="button"><a href="{% url 'forklift_list' %}">Показать машину</a></button>
+        <button id="table2-button" class="button"><a href="{% url 'to_list' %}">Показать TO</a></button>
+        <button id="table3-button" class="button"><a href="{% url 'claim_list' %}">Показать рекламации</a></button>
     </div>
         <hr>
     <div id="table-container">
@@ -61,7 +61,7 @@ Forklift
                 <td>{{ forklift.date_of_shipment }}</td>
                 <td>{{ forklift.end_user }}</td>
                 <td>{{ forklift.delivery_address|truncatechars:20 }}</td>
-                <td>{{ forklift.equipment|truncatewords:6 }}</td>
+                <td>{{ forklift.equipment|truncatewords:30 }}</td>
                 <td>{{ forklift.client.title }}</td>
                 <td>{{ forklift.service_company.title }}</td>
             </tr>
@@ -77,72 +77,9 @@ Forklift
                 <button class="button"><a href="{% url 'forklift_update' forklift.pk %}" class="a-0">Редактировать машину</a></button>
                 <button class="button"><a href="{% url 'forklift_delete' forklift.pk %}" class="a-0">Удалить машину</a></button>
             </div>
-         {% endif %}
-        <table id = "table2" class="common-table">
-        <h2 id="table_header_2" class="login-title">Информация о проведенных ТО Вашей техники</h2>
-            {% if tos %}
-                <tr>
-                    <td> Вид ТО </td>
-                    <td> Дата проведения ТО </td>
-                    <td> Наработка, м/час </td>
-                    <td> № заказ-наряда </td>
-                    <td> дата заказ-наряда </td>
-                    <td> Организация, проводившая ТО </td>
-                    <td> зав. N. машины </td>
-                    <td> сервисная компания </td>
-                </tr>
-
-                    {% for to in tos %}
-                    <tr>
-                        <td><a href="{% url 'controlled_bridge_model_detail' to.forklift.controlled_bridge_model.pk %}">{{ to.type.title }}</a></td>
-                        <td>{{ to.date }}</td>
-                        <td>{{ to.operating }}</td>
-                        <td>{{ to.orders_number }}</td>
-                        <td>{{ to.orders_date }}</td>
-                        <td>{{ to.organization }}</td>
-                        <td><a href="{% url 'forklift_detail' to.forklift.pk %}">{{ to.forklift.machine_serial_number }}</a></td>
-                        <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <h5 id="table_header_3" class="login-title">ТО не найдено</h5>
-            {% endif %}
-        </table>
-
-        <table id = "table3">
-        <h5 id="table_header_3" class="login-title">Информация о рекламациях Вашей техники</h5>
-            {% if claim %}
-            <tr>
-                <td> Дата отказа </td>
-                <td> Наработка, м/час </td>
-                <td> Узел отказа </td>
-                <td> Описание отказа </td>
-                <td> Способ восстановления </td>
-                <td> Используемые запасные части </td>
-                <td> Дата восстановления </td>
-                <td> Время простоя техники </td>
-                <td> машина </td>
-                <td> сервисная компания </td>
-            </tr>
-
-            {% for claim in claims %}
-            <tr>
-                <td>{{ claim.orders_date }}</td>
-                <td>{{ claim.operating }}</td>
-                <td><a href="{% url 'nature_of_failure_detail' claim.order_note.pk %}">{{ claim.order_note.title }}</a></td>
-                <td>{{ claim.order_description }}</td>
-                <td><a href="{% url 'recovery_method_detail' claim.recovery_method.pk %}">{{ claim.recovery_method.title }}</a></td>
-                <td>{{ claim.used_spare_parts }}</td>
-                <td>{{ claim.recovery_date }}</td>
-                <td>{{ claim.downtime }}</td>
-                <td><a href="{% url 'forklift_detail' claim.forklift.pk %}">{{ claim.forklift.machine_serial_number }}</a></td>
-                <td><a href="{% url 'service_company_detail' claim.service_company.pk %}">{{ claim.service_company.title }}</a></td>
-            </tr>
-            {% endfor %}
-            {% else %}
-                <h5 id="table_header_3" class="login-title">Рекламаций нет</h5>
-            {% endif %}
-        </table>
+        {% endif %}
+        
+        
     </div>
     {% block extra_js %}
         <script src="{% static 'scripts/hokkscript.js' %}"></script>

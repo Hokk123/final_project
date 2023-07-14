@@ -3,10 +3,11 @@
 {% load static %}
 
 {% block title %}
-tos
+TO
 {% endblock title %}
  
 {% block content %}
+<link link href="{% static 'css/default.css'%}" rel="stylesheet" />
 <link link href="{% static 'css/forklifts.css'%}" rel="stylesheet" />
    <h2>Все TO</h2>
    
@@ -20,7 +21,6 @@ tos
        <table id = "table1" class="common-table">
         <thead>
             <tr>
-                <th> № </th>
                 <th> Вид ТО </th>
                 <th> Дата проведения ТО </th>
                 <th> Наработка, м/час </td>
@@ -34,14 +34,13 @@ tos
         <tbody>
         {% for to in tos %}
             <tr>
-                <td><a href="{% url 'to_detail' to.pk %}">{{ forloop.counter }}</a></td>
                 <td><a href="{% url 'type_to_detail' to.type.pk %}">{{ to.type.title }}</a></td>
                 <td>{{ to.date }}</td>
                 <td>{{ to.operating }}</td>
                 <td>{{ to.orders_number }}</td>
                 <td>{{ to.orders_date }}</td>
                 <td>{{ to.organization }}</td>
-                <td><a href="{% url 'to_detail' to.car.pk %}">{{ to.car.machine_serial_number }}</a></td>
+                <td><a href="{% url 'forklift_detail' to.car.pk %}">{{ to.car.machine_serial_number }}</a></td>
                 <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
             </tr>
         {% endfor %}

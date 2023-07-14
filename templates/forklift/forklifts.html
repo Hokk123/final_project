@@ -17,6 +17,12 @@ Forklifts
             {% else %}
                 <p class="title"> {{ forklift.0.client.title }} </p>
             {% endif %}
+            <div class="buttons">
+                <button id="table1-button" class="button"><a href="{% url 'forklift_list' %}">Показать машину</a></button>
+                <button id="table2-button" class="button"><a href="{% url 'to_list' %}">Показать TO</a></button>
+                <button id="table3-button" class="button"><a href="{% url 'claim_list' %}">Показать рекламации</a></button>
+            </div>
+            <hr>
             <div class="button">
                 <button id="filter-button" class="button">Фильтр</button>
                 <div id = "filter-block" class = "hidden">
@@ -157,78 +163,6 @@ Forklifts
             {% endif %}
         </table> 
 
-        <h2 id="table_header_2" class="login-title"><a href="{% url 'to_list' %}">Информация о проведенных ТО Вашей техники</a></h2>
-        <table id = "table2" class="common-table">
-            {% if tos %}
-                <thead>
-                    <tr>
-                        <th> № </th>
-                        <th> Вид ТО </th>
-                        <th> Дата проведения ТО </th>
-                        <th> Наработка, м/час </td>
-                        <th> № заказ-наряда </th>
-                        <th> дата заказ-наряда </th>
-                        <th> Организация, проводившая ТО </th>
-                        <th> зав. N. машины </th>
-                        <th> сервисная компания </th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for to in tos %}
-                    <tr>
-                        <td><a href="{% url 'to_detail' to.pk %}">{{ forloop.counter }}</a></td>
-                        <td><a href="{% url 'type_of_to_detail' to.type.pk %}">{{ to.type.title }}</a></td>
-                        <td>{{ to.date }}</td>
-                        <td>{{ to.operating }}</td>
-                        <td>{{ to.orders_number }}</td>
-                        <td>{{ to.orders_date }}</td>
-                        <td>{{ to.organization }}</td>
-                        <td><a href="{% url 'forklift_detail' to.forklift.pk %}">{{ to.car.machine_serial_number }}</a></td>
-                        <td><a href="{% url 'service_company_detail' to.service_company.pk %}">{{ to.service_company.title }}</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            {% else %}
-                <h2 id="table_header_2" class="login-title" style="display:none;">To нет.</h2>
-            {% endif %}
-            </table>
-
-        <table id = "table3" style="display:block;" class="common-table">
-        <h5 id="table_header_3" class="login-title"><a href="{% url 'claim_list' %}">Информация о рекламациях Вашей техники</a></h5>
-        {% if claims %}
-        <tr>
-            <th> № </th>
-            <th> Дата отказа </th>
-            <th> Наработка, м/час </th>
-            <th> Узел отказа </th>
-            <th> Описание отказа </th>
-            <th> Способ восстановления </th>
-            <th> Используемые запасные части </th>
-            <th> Дата восстановления </th>
-            <th> Время простоя техники </th>
-            <th> машина </th>
-            <th> сервисная компания </th>
-        </tr>
-
-        {% for claim in claims %}
-        <tr>
-            <td><a href="{% url 'claim_detail' claim.pk %}">{{ forloop.counter }}</a></td>
-            <td>{{ claim.orders_date }}</td>
-            <td>{{ claim.operating }}</td>
-            <td><a href="{% url 'nature_of_failure_detail' claim.order_note.pk %}">{{ claim.order_note.title }}</a></td>
-            <td>{{ claim.order_description }}</td>
-            <td><a href="{% url 'recovery_method_detail' claim.recovery_method.pk %}">{{ claim.recovery_method.title }}</a></td>
-            <td>{{ claim.used_spare_parts }}</td>
-            <td>{{ claim.recovery_date }}</td>
-            <td>{{ claim.downtime }}</td>
-            <td><a href="{% url 'forklift_detail' claim.forklift.pk %}">{{ claim.forklift.machine_serial_number }}</a></td>
-            <td><a href="{% url 'service_company_detail' claim.service_company.pk %}">{{ claim.service_company.title }}</a></td>
-        </tr>
-        {% endfor %}
-        {% else %}
-            <h2 id="table_header_2" class="login-title" style="display:none;">Рекламаций нет.</h2>
-        {% endif %}
-        </table>
     </div>
     {% block extra_js %}
         <script src="{% static 'scripts/hokkscript.js' %}"></script>

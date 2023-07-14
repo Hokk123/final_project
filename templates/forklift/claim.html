@@ -1,27 +1,32 @@
 {% extends '../default.html' %}
 {% csrf_token %}
+{% load static %}
 
 {% block title %}
 Claim
 {% endblock title %}
  
 {% block content %}
+<link link href="{% static 'css/default.css'%}" rel="stylesheet" />
+<link link href="{% static 'css/forklifts.css'%}" rel="stylesheet" />
     <br>
-    <h5>Информация о рекламации</h5>
-    <hr>
+    <h5 class="login-title">Информация о рекламации</h5>
+    <hr class="hr-to">
     {% if claim %}
-       <table>
+       <table id = "table1" class="common-table">
            <tr>
-               <td> Дата отказа </td>
-               <td> Наработка, м/час </td>
-               <td> Узел отказа </td>
-               <td> Описание отказа </td>
-               <td> Способ восстановления </td>
-               <td> Используемые запасные части </td>
-               <td> Дата восстановления </td>
-               <td> Время простоя техники </td>
-               <td> машина </td>
-               <td> сервисная компания </td>
+            <thead>
+               <th> Дата отказа </th>
+               <th> Наработка, м/час </th>
+               <th> Узел отказа </th>
+               <th> Описание отказа </th>
+               <th> Способ восстановления </th>
+               <th> Используемые запасные части </th>
+               <th> Дата восстановления </th>
+               <th> Время простоя техники </th>
+               <th> машина </th>
+               <th> сервисная компания </th>
+            </thead>
            </tr>
 
            <tr>
@@ -33,7 +38,7 @@ Claim
                 <td>{{ claim.used_spare_parts }}</td>
                 <td>{{ claim.recovery_date }}</td>
                 <td>{{ claim.downtime }}</td>
-                <td><a href="{% url 'forklift_detail' claim.car.pk %}">{{ claim.forklift.machine_serial_number }}</a></td>
+                <td><a href="{% url 'forklift_detail' claim.car.pk %}">{{ claim.car.machine_serial_number }}</a></td>
                 <td><a href="{% url 'service_company_detail' claim.service_company.pk %}">{{ claim.service_company.title }}</a></td>
            </tr>
        </table>
